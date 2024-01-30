@@ -1,8 +1,33 @@
+import { Suspense, lazy } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
+const Layout = lazy(() => import("./layouts/Layout"));
+
 function App() {
   return (
-    <>
-      <h1 className="text-2xl text-center font-bold">NexStay</h1>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={<>Loading...</>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <div>Home</div>
+              </Layout>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <Layout>
+                <div>Search</div>
+              </Layout>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
