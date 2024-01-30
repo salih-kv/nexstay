@@ -6,6 +6,7 @@ import logger from "./utils/logger";
 import connect from "./utils/connect";
 
 import userRoutes from "./routes/user.route";
+import authRoutes from "./routes/auth.route";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 /** ROUTES */
 app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, async () => {
   logger.info(`server running on http://localhost:${PORT}`);

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { compare, hash } from "bcryptjs";
+import { hash } from "bcryptjs";
 
 export type userType = {
   email: string;
@@ -41,12 +41,6 @@ userSchema.pre("save", async function (next) {
   }
   next();
 });
-
-userSchema.methods.comparePassword = async function (
-  candidatePassword: string
-): Promise<Boolean> {
-  return await compare(candidatePassword, this.password).catch((err) => false);
-};
 
 const User = mongoose.model<userType>("User", userSchema);
 

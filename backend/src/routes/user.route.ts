@@ -1,10 +1,10 @@
 import { Request, Response, Router } from "express";
 import { checkSchema, validationResult } from "express-validator";
-import jwt from "jsonwebtoken";
 import User from "../models/user.model";
 import logger from "../utils/logger";
 import verifyToken from "../middlewares/auth";
 import { createUserSchema } from "../schemas/user.schema";
+import { generateToken } from "../utils/jwt";
 
 const router = Router();
 
@@ -47,11 +47,7 @@ router.post(
 
       const newUser = await User.create(req.body);
 
-      const token = jwt.sign(
-        { userId: newUser.id },
-        process.env.JWT_SECRET_KEY as string,
-        { expiresIn: "1d" }
-      );
+      const token = generateToken(newUser.id);
 
       res.cookie("auth_token", token, {
         httpOnly: true,
