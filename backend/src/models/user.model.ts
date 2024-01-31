@@ -3,8 +3,7 @@ import { hash } from "bcryptjs";
 
 export type userType = {
   email: string;
-  firstName: string;
-  lastName: string;
+  name: string;
   password: string;
 };
 
@@ -15,13 +14,9 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter email"],
       unique: [true, "Email already exists"],
     },
-    firstName: {
+    name: {
       type: String,
-      required: [true, "Please enter first name"],
-    },
-    lastName: {
-      type: String,
-      required: [true, "Please enter last name"],
+      required: [true, "Please enter name"],
     },
     password: {
       type: String,

@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+body {
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Webkit browsers */
+body::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+
+/* .active {
+  @apply text-purple-500;
+} */
+
+.hero-bg {
+  background: url("./assets/hero-bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* LOGIN / REGISTER */
+
+.left-bg {
+  background: url("https://www.piersouthresort.com/resourcefiles/hero-image/rooms-hero-aug-2023.jpg?version=1112024061754");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.form-textbox-cont {
+  @apply relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600;
+}
+
+.form-textbox {
+  @apply w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none;
+}
+
+.google-btn {
+  @apply mt-8 flex items-center justify-center rounded-md border px-4 py-2 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2;
+}

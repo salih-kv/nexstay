@@ -4,14 +4,9 @@ export const createUserSchema = {
       errorMessage: "Email must be valid",
     },
   },
-  firstName: {
+  name: {
     isString: {
-      errorMessage: "First Name must be a string!",
-    },
-  },
-  lastName: {
-    isString: {
-      errorMessage: "Last Name must be a string!",
+      errorMessage: "Name must be a string and is required",
     },
   },
   password: {

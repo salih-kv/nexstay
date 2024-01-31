@@ -1,27 +1,25 @@
 import { Link } from "react-router-dom";
-import Logo from "../assets/nexstay.svg";
+import { UserRound } from "lucide-react";
+import Logo from "./Logo";
 
-const Header = () => {
+const Header = ({ className }: { className?: string }) => {
   const isLoggedIn = false;
   return (
-    <header className="bg-indigo-800 py-6">
+    <header className={`fixed mx-auto w-full py-6 ${className}`}>
       <div className="container mx-auto flex justify-between">
-        <span className="text-3xl text-white font-medium tracking-tight">
-          <Link to="/">
-            <img src={Logo} alt="NexStay" className="w-36" />
-          </Link>
-        </span>
+        <Logo />
+
         <span className="flex space-x-2">
           {isLoggedIn ? (
             <>
               <Link
-                className="flex items-center text-white px-3 font-medium hover:bg-indigo-600"
+                className="flex items-center text-white px-3 font-medium"
                 to="/my-bookings"
               >
                 My Bookings
               </Link>
               <Link
-                className="flex items-center text-white px-3 font-medium hover:bg-indigo-600"
+                className="flex items-center text-white px-3 font-medium"
                 to="/my-hotels"
               >
                 My Hotels
@@ -31,8 +29,9 @@ const Header = () => {
           ) : (
             <Link
               to="/sign-in"
-              className="flex bg-white rounded-sm items-center text-indigo-600 px-3 font-medium hover:bg-gray-100"
+              className="flex gap-2 bg-white rounded-lg items-center px-3 font-medium hover:bg-gray-100"
             >
+              <UserRound size={16} />
               Sign In
             </Link>
           )}
