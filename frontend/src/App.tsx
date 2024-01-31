@@ -1,7 +1,10 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-const Layout = lazy(() => import("./layouts/Layout"));
+const Layout = lazy(() => import("@/layouts/Layout"));
+const Home = lazy(() => import("@/app/home"));
+const Register = lazy(() => import("@/app/register"));
+const Login = lazy(() => import("@/app/login"));
 
 function App() {
   return (
@@ -12,7 +15,7 @@ function App() {
             path="/"
             element={
               <Layout>
-                <div>Home</div>
+                <Home />
               </Layout>
             }
           />
@@ -24,6 +27,8 @@ function App() {
               </Layout>
             }
           />
+          <Route path="/register" element={<Register />} />
+          <Route path="/sign-in" element={<Login />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
