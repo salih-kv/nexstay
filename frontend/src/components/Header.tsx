@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { UserRound } from "lucide-react";
 import Logo from "./Logo";
 
+import { cn } from "@/lib/utils";
+
 const Header = ({ className }: { className?: string }) => {
   const isLoggedIn = false;
   return (
-    <header className={`fixed mx-auto w-full py-6 ${className}`}>
-      <div className="container mx-auto flex justify-between">
+    <header className={cn("fixed mx-auto w-full py-6", className)}>
+      <div className="container px-4 mx-auto flex justify-between">
         <Logo />
 
         <span className="flex space-x-2">

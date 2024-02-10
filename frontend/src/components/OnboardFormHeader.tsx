@@ -32,7 +32,7 @@ const OnboardFormHeader = ({
         <FcGoogle className="mr-2" />
         {btnText}
       </button>
-      <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
+      <div className="relative mt-8 mb-4 md:mb-0 flex h-px place-items-center bg-gray-200">
         <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-white px-4 text-center text-sm text-gray-500">
           Or use email instead
         </div>

@@ -45,13 +45,17 @@ body::-webkit-scrollbar {
 }
 
 .form-textbox-cont {
-  @apply relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600;
+  @apply relative flex overflow-hidden rounded-md border-2 transition focus-within:border-primary-600;
 }
 
 .form-textbox {
-  @apply w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none;
+  @apply w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none placeholder:text-sm placeholder:sm:text-base;
 }
 
 .google-btn {
   @apply mt-8 flex items-center justify-center rounded-md border px-4 py-2 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2;
+}
+
+.btn {
+  @apply mt-4 rounded-lg bg-primary-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-primary-600 ring-offset-2 transition hover:bg-primary-700 focus:ring-2 md:w-32;
 }
