@@ -15,7 +15,7 @@ const Register = () => {
             title="Create your free account"
             subtitle="Already using nexstay?"
             linkText="Login"
-            to="/sign-in"
+            to="/login"
             btnText="Get started with Google"
           />
           <RegisterForm />

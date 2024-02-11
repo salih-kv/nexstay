@@ -24,7 +24,7 @@ const LoginForm = () => {
   const mutation = useMutation(apiClient.login, {
     onSuccess: async () => {
       toast({
-        title: "Sign in Successful!",
+        title: "Login Successful!",
       });
       await queryClient.invalidateQueries("validateToken");
       navigate("/");

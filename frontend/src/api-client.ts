@@ -9,3 +9,11 @@ export const register = async (formData: RegisterFormInputs) => {
 export const login = async (formData: LoginFormInputs) => {
   await instance.post("/api/auth/login", formData);
 };
+
+export const validateToken = async () => {
+  await instance.get("/api/auth/validate-token");
+};
+
+export const logout = async () => {
+  await instance.post("/api/auth/logout");
+};
