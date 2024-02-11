@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
 
 const Layout = lazy(() => import("@/layouts/Layout"));
 const Home = lazy(() => import("@/app/home"));
@@ -32,6 +33,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
+      <Toaster />
     </BrowserRouter>
   );
 }

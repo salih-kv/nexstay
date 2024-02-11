@@ -1,5 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const OnboardFormHeader = ({
   title,
@@ -28,10 +29,10 @@ const OnboardFormHeader = ({
           {linkText}
         </Link>
       </p>
-      <button className="google-btn">
+      <Button variant="outline" className="mt-8">
         <FcGoogle className="mr-2" />
-        {btnText}
-      </button>
+        <span>{btnText}</span>
+      </Button>
       <div className="relative mt-8 mb-4 md:mb-0 flex h-px place-items-center bg-gray-200">
         <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-white px-4 text-center text-sm text-gray-500">
           Or use email instead

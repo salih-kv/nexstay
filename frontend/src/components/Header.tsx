@@ -3,6 +3,7 @@ import { UserRound } from "lucide-react";
 import Logo from "./Logo";
 
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 const Header = ({ className }: { className?: string }) => {
   const isLoggedIn = false;
@@ -14,28 +15,21 @@ const Header = ({ className }: { className?: string }) => {
         <span className="flex space-x-2">
           {isLoggedIn ? (
             <>
-              <Link
-                className="flex items-center text-white px-3 font-medium"
-                to="/my-bookings"
-              >
-                My Bookings
-              </Link>
-              <Link
-                className="flex items-center text-white px-3 font-medium"
-                to="/my-hotels"
-              >
-                My Hotels
-              </Link>
+              <Button variant="link" className="text-white">
+                <Link to="/my-bookings">My Bookings</Link>
+              </Button>
+              <Button variant="link" className="text-white">
+                <Link to="/my-hotels">My Hotels</Link>
+              </Button>
               {/* TODO: SIGN OUT BUTTON */}
             </>
           ) : (
-            <Link
-              to="/sign-in"
-              className="flex gap-2 bg-white rounded-lg items-center px-3 font-medium hover:bg-gray-100"
-            >
-              <UserRound size={16} />
-              Sign In
-            </Link>
+            <Button asChild variant="secondary">
+              <Link to="/sign-in">
+                <UserRound size={16} className="mr-2" />
+                Sign In
+              </Link>
+            </Button>
           )}
         </span>
       </div>
