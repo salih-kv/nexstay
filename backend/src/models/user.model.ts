@@ -5,6 +5,10 @@ export type userType = {
   email: string;
   name: string;
   password: string;
+  role: string;
+  hostDetails?: {
+    requestStatus: string;
+  };
 };
 
 const userSchema = new mongoose.Schema(
@@ -23,6 +27,19 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter password"],
       minlength: [6, "Password must be of minimum 6 characters"],
       select: false,
+    },
+    role: {
+      type: String,
+      enum: ["User", "Host", "Admin"],
+      default: "User",
+      required: true,
+    },
+    hostDetails: {
+      requestStatus: {
+        type: String,
+        enum: ["pending", "approved", "rejected"],
+        default: "pending",
+      },
     },
   },
   {
