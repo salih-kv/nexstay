@@ -4,7 +4,7 @@ import { compare } from "bcryptjs";
 import User from "../models/user.model";
 import logger from "../utils/logger";
 import { generateToken } from "../utils/jwt";
-import verifyToken from "../middlewares/auth";
+import { verifyToken } from "../middlewares/auth";
 
 const router = Router();
 
@@ -63,7 +63,7 @@ router.get(
   "/validate-token",
   verifyToken,
   async (req: Request, res: Response) => {
-    res.status(200).send({ userId: req.userId });
+    res.status(200).json({ userId: req.userId });
   }
 );
 
