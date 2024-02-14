@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
-import nexstay from "@/assets/nexstay.svg";
 
 const Logo = ({ sx }: { sx?: string }) => {
   return (
-    <span className={`${sx}`}>
-      <Link to="/">
-        <img src={nexstay} alt="nexstay" className="w-36" />
-      </Link>
+    <span className={`${sx} font-logo text-3xl font-bold text-primary-500`}>
+      <Link to="/">nextstay .</Link>
     </span>
   );
 };
