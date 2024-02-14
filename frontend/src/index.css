@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=K2D:wght@400;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -58,19 +60,12 @@
   }
 }
 
-@layer utilities {
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
   overflow: -moz-scrollbars-none;
   scrollbar-width: none;
 }
@@ -81,14 +76,8 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* .active {
-  @apply text-purple-500;
-} */
-
-.hero-bg {
-  background: url("./assets/hero-bg.png");
-  background-repeat: no-repeat;
-  background-position: center;
+.active {
+  @apply text-primary-500;
 }
 
 /* LOGIN / REGISTER */

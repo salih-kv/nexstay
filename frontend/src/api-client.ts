@@ -3,7 +3,7 @@ import { LoginFormInputs } from "./forms/LoginForm";
 import { RegisterFormInputs } from "./forms/RegisterForm";
 
 export const register = async (formData: RegisterFormInputs) => {
-  await instance.post("/api/users/register", formData);
+  await instance.post("/api/user/register", formData);
 };
 
 export const login = async (formData: LoginFormInputs) => {
@@ -11,7 +11,13 @@ export const login = async (formData: LoginFormInputs) => {
 };
 
 export const validateToken = async () => {
-  await instance.get("/api/auth/validate-token");
+  const response = await instance.get("/api/auth/validate-token");
+  return response.data;
+};
+
+export const getUser = async () => {
+  const response = await instance.get("/api/user/me");
+  return response.data;
 };
 
 export const logout = async () => {

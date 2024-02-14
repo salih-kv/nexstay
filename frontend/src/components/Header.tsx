@@ -1,57 +1,39 @@
 import { Link } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
-import { LogOut, UserRound } from "lucide-react";
+import { CircleUser, UserRound } from "lucide-react";
 import Logo from "./Logo";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { useAppContext } from "@/contexts/AppContext";
-import * as apiClient from "../api-client";
-import { toast } from "./ui/use-toast";
+import ProfileDropdown from "./ProfileDropdown";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = ({ className }: { className?: string }) => {
-  const { isLoggedIn } = useAppContext();
+  const { isLoggedIn, user } = useAppContext();
 
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation(apiClient.logout, {
-    onSuccess: async () => {
-      toast({
-        title: "Logout Successful!",
-      });
-      await queryClient.invalidateQueries("validateToken");
-    },
-    onError: (error: Error) => {
-      toast({
-        variant: "destructive",
-        description: error.message,
-      });
-      console.log(error);
-    },
-  });
-
-  const handleLogout = () => {
-    mutation.mutate();
-  };
   return (
-    <header className={cn("fixed mx-auto w-full py-6", className)}>
-      <div className="container px-4 mx-auto flex justify-between">
-        <Logo />
+    <header
+      className={cn(
+        "fixed mx-auto w-full py-6 bg-primary-500 text-white z-50",
+        className
+      )}
+    >
+      <div className="container px-4 mx-auto flex justify-between items-center">
+        <Logo sx="!text-white" />
 
-        <span className="flex space-x-2">
+        <div className="flex items-center space-x-2">
           {isLoggedIn ? (
-            <>
-              <Button variant="link" className="text-white">
-                <Link to="/my-bookings">My Bookings</Link>
-              </Button>
-              <Button variant="link" className="text-white">
-                <Link to="/my-hotels">My Hotels</Link>
-              </Button>
-              <Button onClick={handleLogout} variant="secondary">
-                Logout
-                <LogOut size={16} className="ml-2" />
-              </Button>
-              {/* TODO: SIGN OUT BUTTON */}
-            </>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex items-center justify-center gap-2   hover:bg-black/10 p-2 rounded-sm cursor-pointer">
+                  <CircleUser className="w-8 h-8" />
+                  <span className="font-medium">{user?.name}</span>
+                </div>
+              </DropdownMenuTrigger>
+              <ProfileDropdown />
+            </DropdownMenu>
           ) : (
             <Button asChild variant="secondary">
               <Link to="/login">
@@ -60,7 +42,7 @@ const Header = ({ className }: { className?: string }) => {
               </Link>
             </Button>
           )}
-        </span>
+        </div>
       </div>
     </header>
   );
