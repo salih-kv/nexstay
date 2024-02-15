@@ -55,7 +55,12 @@ const LoginForm = () => {
             placeholder="Email"
             {...register("email", { required: "This field is required" })}
           />
-          {errors.email && <ErrorToolTip errorMessage={errors.email.message} />}
+          {errors.email && (
+            <ErrorToolTip
+              className="right-3"
+              errorMessage={errors.email.message}
+            />
+          )}
         </div>
       </div>
       <div className="mb-4 flex flex-col pt-4">
@@ -68,7 +73,10 @@ const LoginForm = () => {
             {...register("password", { required: "This field is required" })}
           />
           {errors.password && (
-            <ErrorToolTip errorMessage={errors.password.message} />
+            <ErrorToolTip
+              className="right-3"
+              errorMessage={errors.password.message}
+            />
           )}
         </div>
       </div>

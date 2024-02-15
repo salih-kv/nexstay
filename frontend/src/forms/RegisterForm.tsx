@@ -58,7 +58,12 @@ const RegisterForm = () => {
             placeholder="Name"
             {...register("name", { required: "This field is required" })}
           />
-          {errors.name && <ErrorToolTip errorMessage={errors.name.message} />}
+          {errors.name && (
+            <ErrorToolTip
+              className="right-3"
+              errorMessage={errors.name.message}
+            />
+          )}
         </div>
       </div>
       <div className="flex flex-col pt-4">
@@ -69,7 +74,12 @@ const RegisterForm = () => {
             placeholder="Email"
             {...register("email", { required: "This field is required" })}
           />
-          {errors.email && <ErrorToolTip errorMessage={errors.email.message} />}
+          {errors.email && (
+            <ErrorToolTip
+              className="right-3"
+              errorMessage={errors.email.message}
+            />
+          )}
         </div>
       </div>
       <div className="mb-4 flex flex-col sm:flex-row gap-4 justify-between pt-4">
@@ -87,7 +97,10 @@ const RegisterForm = () => {
             })}
           />
           {errors.password && (
-            <ErrorToolTip errorMessage={errors.password.message} />
+            <ErrorToolTip
+              className="right-3"
+              errorMessage={errors.password.message}
+            />
           )}
         </div>
         <div className="form-textbox-cont">
@@ -107,7 +120,10 @@ const RegisterForm = () => {
             })}
           />
           {errors.confirmPassword && (
-            <ErrorToolTip errorMessage={errors.confirmPassword.message} />
+            <ErrorToolTip
+              className="right-3"
+              errorMessage={errors.confirmPassword.message}
+            />
           )}
         </div>
       </div>
