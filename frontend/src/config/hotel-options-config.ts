@@ -21,8 +21,8 @@ export const HOTEL_FACILITIES = [
   "Parking",
   "Airport Shuttle",
   "Family Rooms",
-  "Non-Smoking Rooms",
   "Outdoor Pool",
+  "Non-Smoking Rooms",
   "Spa",
   "Fitness Center",
 ];

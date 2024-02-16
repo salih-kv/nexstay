@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { HOTEL_TYPES } from "@/config/hotel-options-config";
 import { HotelFormData } from "./ManageHotelForm";
+import { ErrorToolTip } from "@/components/ErrorToolTip";
 
 const HotelTypeSection = () => {
   const {
@@ -10,10 +11,14 @@ const HotelTypeSection = () => {
   } = useFormContext<HotelFormData>();
 
   const typeWatch = watch("type");
+
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4 text-black/80">Hotel Type</h2>
-      <div className="grid grid-cols-5 gap-2">
+      <h2 className="text-xl font-bold mb-4 text-black/80 relative">
+        <span className="mr-2">Hotel Type</span>
+        {errors.type && <ErrorToolTip errorMessage={errors.type.message} />}
+      </h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
         {HOTEL_TYPES.map((type) => (
           <label
             key={type}
@@ -35,11 +40,6 @@ const HotelTypeSection = () => {
           </label>
         ))}
       </div>
-      {errors.type && (
-        <span className="text-red-500 text-sm font-bold">
-          {errors.type.message}
-        </span>
-      )}
     </div>
   );
 };

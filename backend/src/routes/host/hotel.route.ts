@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { checkSchema } from "express-validator";
+import { checkSchema, validationResult } from "express-validator";
 import multer from "multer";
 import { verifyToken } from "../../middlewares/auth";
 import { createHotelSchema } from "../../schemas/hotel.schema";
@@ -27,13 +27,15 @@ router.post(
   checkSchema(createHotelSchema),
   upload.array("imageFiles", 6),
   async (req: Request, res: Response) => {
+    const result = validationResult(req);
+
+    if (!result.isEmpty()) {
+      return res.status(400).send({ errors: result.array() });
+    }
+
     try {
-      const imageFiles = req.files as Express.Multer.File[];
       const newHotel: HotelType = req.body;
 
-      const imageUrls = await uploadImages(imageFiles);
-
-      newHotel.imageUrls = imageUrls;
       newHotel.lastUpdated = new Date();
       newHotel.userId = req.userId;
 

@@ -108,3 +108,43 @@ body::-webkit-scrollbar {
 .btn {
   @apply mt-4 rounded-lg bg-primary-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-primary-600 ring-offset-2 transition hover:bg-primary-700 focus:ring-2 md:w-32;
 } */
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Style the custom checkbox */
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 25px; /* Adjust as needed */
+  cursor: pointer;
+}
+
+/* Create the checkbox icon */
+input[type="checkbox"] + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Style the checkbox when checked */
+input[type="checkbox"]:checked + label:before {
+  @apply bg-black;
+}
+
+/* Create the checkmark icon */
+input[type="checkbox"]:checked + label:after {
+  content: "\2713"; /* Unicode checkmark symbol */
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  color: #fff; /* Color of the checkmark */
+  font-size: 16px;
+}

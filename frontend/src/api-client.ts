@@ -23,3 +23,8 @@ export const getUser = async () => {
 export const logout = async () => {
   await instance.post("/api/auth/logout");
 };
+
+export const addMyHotel = async (hotelFormData: FormData) => {
+  const response = await instance.post("/api/host/hotels/", hotelFormData);
+  return response.data;
+};

@@ -13,6 +13,7 @@ const Dashboard = lazy(() => import("@/app/dashboard"));
 const MyHotels = lazy(() => import("@/app/dashboard/MyHotels"));
 const Bookings = lazy(() => import("@/app/dashboard/Bookings"));
 const AddHotel = lazy(() => import("@/app/add-hotel"));
+const EditHotel = lazy(() => import("@/app/edit-hotel"));
 
 function App() {
   return (
@@ -41,10 +42,7 @@ function App() {
                 <Route path="bookings" element={<Bookings />} />
               </Route>
               <Route path="add-hotel" element={<AddHotel />} />
-              <Route
-                path="hotel/:hotelId/edit"
-                element={<>Edit hotel Details</>}
-              />
+              <Route path="hotel/:hotelId/edit" element={<EditHotel />} />
             </Route>
             {/* USER/HOST 🔒 */}
             <Route element={<PrivateRoute roles={["User", "Host"]} />}>

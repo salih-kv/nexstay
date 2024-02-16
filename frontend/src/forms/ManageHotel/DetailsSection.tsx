@@ -3,14 +3,7 @@ import { HotelFormData } from "./ManageHotelForm";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ErrorToolTip } from "@/components/ErrorToolTip";
 
 const DetailsSection = () => {
   const {
@@ -25,50 +18,74 @@ const DetailsSection = () => {
       </header>
 
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="name">Name</Label>
-        <Input type="text" />
+        <Label htmlFor="name" className="relative">
+          <span className="pr-2">Name</span>
+          {errors.name && <ErrorToolTip errorMessage={errors.name.message} />}
+        </Label>
+        <Input
+          id="name"
+          type="text"
+          {...register("name", { required: "This field is required" })}
+        />
       </div>
 
       <div className="flex gap-4">
-        <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="city">City</Label>
-          <Input type="text" />
+        <div className="grid w-full items-center gap-1.5 ">
+          <Label htmlFor="city" className="relative">
+            <span className="pr-2">City</span>
+            {errors.city && <ErrorToolTip errorMessage={errors.city.message} />}
+          </Label>
+          <Input
+            id="city"
+            type="text"
+            {...register("city", { required: "This field is required" })}
+          />
         </div>
         <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="country">Country</Label>
-          <Input type="text" />
+          <Label htmlFor="country" className="relative">
+            <span className="pr-2">Country</span>
+            {errors.country && (
+              <ErrorToolTip errorMessage={errors.country.message} />
+            )}
+          </Label>
+          <Input
+            id="country"
+            type="text"
+            {...register("country", { required: "This field is required" })}
+          />
         </div>
       </div>
 
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="description">Description</Label>
+        <Label htmlFor="description" className="relative">
+          <span className="pr-2">Description</span>
+          {errors.description && (
+            <ErrorToolTip errorMessage={errors.description.message} />
+          )}
+        </Label>
         <Textarea
+          id="description"
           rows={10}
           placeholder="Write a description about the hotel"
           className="resize-none"
+          {...register("description", { required: "This field is required" })}
         />
       </div>
 
       <div className="grid w-full items-center gap-1.5 max-w-[50%]">
-        <Label htmlFor="price">Price Per Night</Label>
-        <Input type="number" min={1} />
+        <Label htmlFor="price" className="relative">
+          <span className="pr-2">Price Per Night</span>
+          {errors.pricePerNight && (
+            <ErrorToolTip errorMessage={errors.pricePerNight.message} />
+          )}
+        </Label>
+        <Input
+          id="price"
+          type="number"
+          min={1}
+          {...register("pricePerNight", { required: "This field is required" })}
+        />
       </div>
-
-      <Select>
-        <Label htmlFor="rating">Star Rating</Label>
-        <SelectTrigger className="w-full max-w-[50%]">
-          <SelectValue placeholder="Select as Rating" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {[1, 2, 3, 4, 5].map((num) => (
-              <SelectItem key={num} value={num.toString()}>
-                {num}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
     </div>
   );
 };
