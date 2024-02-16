@@ -28,3 +28,8 @@ export const addMyHotel = async (hotelFormData: FormData) => {
   const response = await instance.post("/api/host/hotels/", hotelFormData);
   return response.data;
 };
+
+export const fetchMyHotels = async () => {
+  const response = await instance.get("/api/host/hotels/");
+  return response.data;
+};
