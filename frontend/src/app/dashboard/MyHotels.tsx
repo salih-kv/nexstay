@@ -25,6 +25,7 @@ const MyHotels = () => {
           {hotelData ? (
             hotelData?.map((hotel: HotelType) => (
               <div
+                key={hotel._id}
                 data-testid="hotel-card"
                 className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5"
               >
@@ -48,12 +49,18 @@ const MyHotels = () => {
                     {hotel.adultCount} adults, {hotel.childCount} children
                   </div>
                 </div>
-                <span className="flex justify-end">
+                <span className="flex space-x-3 justify-end">
                   <Link
-                    to={`/edit-hotel/${hotel._id}`}
-                    className={buttonVariants()}
+                    to={`/hotel/${hotel._id}`}
+                    className={buttonVariants({ variant: "secondary" })}
                   >
                     View Details
+                  </Link>
+                  <Link
+                    to={`/hotel/${hotel._id}/edit`}
+                    className={buttonVariants()}
+                  >
+                    Edit Details
                   </Link>
                 </span>
               </div>

@@ -47,3 +47,22 @@ export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
   const response = await instance.get(`/api/hotels/${hotelId}`);
   return response.data;
 };
+
+export const updateMyHotelById = async (hotelFormData: FormData) => {
+  console.log(hotelFormData.get("hotelId"));
+
+  try {
+    const response = await instance.put(
+      `/api/host/hotels/${hotelFormData.get("hotelId")}`,
+      hotelFormData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to add hotel");
+  }
+};

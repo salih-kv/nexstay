@@ -14,6 +14,7 @@ const MyHotels = lazy(() => import("@/app/dashboard/MyHotels"));
 const Bookings = lazy(() => import("@/app/dashboard/Bookings"));
 const AddHotel = lazy(() => import("@/app/add-hotel"));
 const EditHotel = lazy(() => import("@/app/edit-hotel"));
+const HotelDetailsPage = lazy(() => import("@/app/hotel-details"));
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
 
           {/* LAYOUT START */}
           <Route element={<Layout />}>
-            <Route path="/hotel/:hotelId" element={<>Hotel Details Page</>} />
+            <Route path="/hotel/:hotelId" element={<HotelDetailsPage />} />
             {/* Admin 🔒 */}
             <Route element={<PrivateRoute roles={["Admin"]} />}>
               <Route path="/admin" element={<>Admin Page</>} />
