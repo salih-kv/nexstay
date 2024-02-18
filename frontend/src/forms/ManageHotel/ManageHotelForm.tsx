@@ -7,6 +7,7 @@ import GuestsSection from "./GuestsSection";
 import { Button } from "@/components/ui/button";
 
 import { HotelType } from "../../../../backend/src/models/hotel.model";
+import ImagesSection from "./ImagesSection";
 
 export type HotelFormData = {
   name: string;
@@ -17,14 +18,13 @@ export type HotelFormData = {
   pricePerNight: number;
   facilities: string[];
   imageFiles: FileList;
-  imageUrls: string[];
   adultCount: number;
   childCount: number;
 };
 
 type Props = {
   hotel?: HotelType;
-  onSave: (hotelFormData: HotelFormData) => void;
+  onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
 
@@ -37,7 +37,30 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
   }, [hotel, reset]);
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
-    onSave(formDataJson);
+    const formData = new FormData();
+
+    formData.append("name", formDataJson.name);
+    formData.append("city", formDataJson.city);
+    formData.append("country", formDataJson.country);
+    formData.append("description", formDataJson.description);
+    formData.append("type", formDataJson.type);
+    formData.append("pricePerNight", formDataJson.pricePerNight.toString());
+    formData.append("adultCount", formDataJson.adultCount.toString());
+    formData.append("childCount", formDataJson.childCount.toString());
+
+    formDataJson.facilities.forEach((facility, index) => {
+      formData.append(`facilities[${index}]`, facility);
+    });
+
+    Array.from(formDataJson.imageFiles).forEach((imageFile) => {
+      formData.append(`imageFiles`, imageFile);
+    });
+
+    try {
+      onSave(formData);
+    } catch (error) {
+      console.error("Failed to save hotel:", error);
+    }
   });
 
   return (
@@ -50,6 +73,7 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
         <HotelTypeSection />
         <FacilitiesSection />
         <GuestsSection />
+        <ImagesSection />
         <span className="flex justify-end">
           <Button disabled={isLoading} type="submit">
             {isLoading ? "Saving..." : "Save"}

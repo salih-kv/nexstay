@@ -1,8 +1,6 @@
 import { Router, Request, Response } from "express";
-import { checkSchema, validationResult } from "express-validator";
 import multer from "multer";
 import { verifyToken } from "../../middlewares/auth";
-import { createHotelSchema } from "../../schemas/hotel.schema";
 import Hotel, { HotelType } from "../../models/hotel.model";
 import { uploadImages } from "../../utils/upload";
 import logger from "../../utils/logger";
@@ -24,18 +22,19 @@ const upload = multer({
 router.post(
   "/",
   verifyToken,
-  checkSchema(createHotelSchema),
   upload.array("imageFiles", 6),
   async (req: Request, res: Response) => {
-    const result = validationResult(req);
-
-    if (!result.isEmpty()) {
-      return res.status(400).send({ errors: result.array() });
-    }
-
     try {
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ message: "No files uploaded" });
+      }
+
+      const imageFiles = req.files as Express.Multer.File[];
       const newHotel: HotelType = req.body;
 
+      const imageUrls = await uploadImages(imageFiles);
+
+      newHotel.imageUrls = imageUrls;
       newHotel.lastUpdated = new Date();
       newHotel.userId = req.userId;
 

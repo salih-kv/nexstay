@@ -8,6 +8,7 @@ import connect from "./utils/connect";
 
 import authRoutes from "./routes/auth.route";
 import userRoutes from "./routes/user/user.route";
+import hotelRoutes from "./routes/user/hotel.route";
 import hostHotelRoutes from "./routes/host/hotel.route";
 import adminRoutes from "./routes/admin/admin.route";
 
@@ -30,6 +31,7 @@ app.use("/api/auth", authRoutes);
 
 /** USER ROUTES */
 app.use("/api/user", userRoutes);
+app.use("/api/hotels", hotelRoutes);
 
 /** HOST ROUTES */
 app.use("/api/host/hotels", hostHotelRoutes);
