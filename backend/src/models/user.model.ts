@@ -1,15 +1,6 @@
 import mongoose from "mongoose";
 import { hash } from "bcryptjs";
-
-export type userType = {
-  email: string;
-  name: string;
-  password: string;
-  role: string;
-  hostDetails?: {
-    requestStatus: string;
-  };
-};
+import { UserType } from "../shared/types";
 
 const userSchema = new mongoose.Schema(
   {
@@ -54,6 +45,6 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-const User = mongoose.model<userType>("User", userSchema);
+const User = mongoose.model<UserType>("User", userSchema);
 
 export default User;

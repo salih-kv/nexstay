@@ -1,7 +1,7 @@
+import { HotelType } from "../../backend/src/shared/types";
 import instance from "./axios/instance";
 import { LoginFormInputs } from "./forms/LoginForm";
 import { RegisterFormInputs } from "./forms/RegisterForm";
-import { HotelType } from "../../backend/src/models/hotel.model";
 
 export const register = async (formData: RegisterFormInputs) => {
   await instance.post("/api/user/register", formData);

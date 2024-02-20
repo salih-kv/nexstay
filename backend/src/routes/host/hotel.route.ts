@@ -1,9 +1,10 @@
 import { Router, Request, Response } from "express";
 import multer from "multer";
 import { verifyToken } from "../../middlewares/auth";
-import Hotel, { HotelType } from "../../models/hotel.model";
+import Hotel from "../../models/hotel.model";
 import { uploadImages } from "../../utils/upload";
 import logger from "../../utils/logger";
+import { HotelType } from "../../shared/types";
 
 const router = Router();
 
@@ -57,7 +58,8 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
   try {
     const hotels = await Hotel.find({ userId: req.userId });
     res.json(hotels);
-  } catch (error) {
+  } catch (e) {
+    logger.error(e);
     res.status(500).json({ message: "Error fetching hotels" });
   }
 });
@@ -74,7 +76,8 @@ router.get("/:id", verifyToken, async (req: Request, res: Response) => {
       userId: req.userId,
     });
     res.json(hotel);
-  } catch (error) {
+  } catch (e) {
+    logger.error(e);
     res.status(500).json({ message: "Error fetching hotel" });
   }
 });
@@ -88,13 +91,10 @@ router.put(
   verifyToken,
   upload.array("imageFiles"),
   async (req: Request, res: Response) => {
-    
     try {
       const updatedHotel: HotelType = req.body;
       updatedHotel.lastUpdated = new Date();
 
-      console.log(req.params.hotelId);
-      
       const hotel = await Hotel.findOneAndUpdate(
         {
           _id: req.params.hotelId,
@@ -118,7 +118,8 @@ router.put(
 
       await hotel.save();
       res.status(201).json(hotel);
-    } catch (error) {
+    } catch (e) {
+      logger.error(e);
       res.status(500).json({ message: "Something went wrong" });
     }
   }
