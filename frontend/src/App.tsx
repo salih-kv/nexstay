@@ -8,13 +8,18 @@ const DashBoardLayout = lazy(() => import("@/layouts/DashBoardLayout"));
 const Register = lazy(() => import("@/app/register"));
 const Login = lazy(() => import("@/app/login"));
 const Home = lazy(() => import("@/app/home"));
+const Search = lazy(() => import("@/app/search"));
+const Booking = lazy(() => import("@/app/booking"));
+const HotelDetailsPage = lazy(() => import("@/app/hotel-details"));
+const MyBookings = lazy(() => import("@/app/my-bookings"));
 
 const Dashboard = lazy(() => import("@/app/dashboard"));
 const MyHotels = lazy(() => import("@/app/dashboard/MyHotels"));
 const Bookings = lazy(() => import("@/app/dashboard/Bookings"));
 const AddHotel = lazy(() => import("@/app/add-hotel"));
 const EditHotel = lazy(() => import("@/app/edit-hotel"));
-const HotelDetailsPage = lazy(() => import("@/app/hotel-details"));
+
+const Admin = lazy(() => import("@/app/admin"));
 
 function App() {
   return (
@@ -25,14 +30,14 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<div>Search</div>} />
+          <Route path="/search" element={<Search />} />
 
           {/* LAYOUT START */}
           <Route element={<Layout />}>
             <Route path="/hotel/:hotelId" element={<HotelDetailsPage />} />
             {/* Admin 🔒 */}
             <Route element={<PrivateRoute roles={["Admin"]} />}>
-              <Route path="/admin" element={<>Admin Page</>} />
+              <Route path="/admin" element={<Admin />} />
             </Route>
 
             {/* HOST 🔒 */}
@@ -45,13 +50,10 @@ function App() {
               <Route path="add-hotel" element={<AddHotel />} />
               <Route path="hotel/:hotelId/edit" element={<EditHotel />} />
             </Route>
-            {/* USER/HOST 🔒 */}
+            {/* USER | HOST 🔒 */}
             <Route element={<PrivateRoute roles={["User", "Host"]} />}>
-              <Route path="/my-bookings" element={<>My Bookings</>} />
-              <Route
-                path="/hotel/:hotelId/booking"
-                element={<>Book Hotels</>}
-              />
+              <Route path="/my-bookings" element={<MyBookings />} />
+              <Route path="/hotel/:hotelId/booking" element={<Booking />} />
             </Route>
           </Route>
           {/* LAYOUT END */}

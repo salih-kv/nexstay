@@ -2,8 +2,23 @@ import { Router, Request, Response } from "express";
 import { param, validationResult } from "express-validator";
 import Hotel from "../../models/hotel.model";
 import logger from "../../utils/logger";
+import { HotelSearchResponse } from "../../shared/types";
 
 const router = Router();
+
+/**
+ * GETTING ALL HOTELS
+ * GET /api/hotels/
+ */
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find().sort("-lastUpdated");
+    res.json(hotels);
+  } catch (e) {
+    logger.error("error", e);
+    res.status(500).json({ message: "Error fetching hotels" });
+  }
+});
 
 /**
  * GETTING HOTEL BY HOTEL ID

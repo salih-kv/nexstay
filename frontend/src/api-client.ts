@@ -1,4 +1,4 @@
-import { HotelType } from "../../backend/src/shared/types";
+import { HotelSearchResponse, HotelType } from "../../backend/src/shared/types";
 import instance from "./axios/instance";
 import { LoginFormInputs } from "./forms/LoginForm";
 import { RegisterFormInputs } from "./forms/RegisterForm";
@@ -65,4 +65,9 @@ export const updateMyHotelById = async (hotelFormData: FormData) => {
   } catch (error) {
     throw new Error("Failed to add hotel");
   }
+};
+
+export const fetchHotels = async () => {
+  const response = await instance.get(`/api/hotels`);
+  return response.data;
 };
